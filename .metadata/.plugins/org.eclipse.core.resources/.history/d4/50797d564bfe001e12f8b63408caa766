@@ -1,0 +1,14 @@
+package com.example.services;
+
+import java.util.List;
+
+import com.example.model.Books;
+import com.example.pojo.BooksResource;
+
+public interface BooksService {
+	public List<BooksResource> getAllBooks(int page, int size, String genre, String author, String title, String location, Boolean availability) {
+
+	List<Books> fetchBooksList();
+
+	public BooksResource getBookById(Long id);
+}

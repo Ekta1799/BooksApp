@@ -1,0 +1,29 @@
+package com.example.model;
+
+import java.awt.print.Book;
+
+import jakarta.persistence.EmbeddedId;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.MapsId;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "user_reading_preference")
+public class UserReadingPreference {
+    @EmbeddedId
+    private Long id;
+
+    @ManyToOne
+    @MapsId("userId")
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ManyToOne
+    @MapsId("bookId")
+    @JoinColumn(name = "book_id")
+    private Book book;
+
+    // Getters and setters
+}

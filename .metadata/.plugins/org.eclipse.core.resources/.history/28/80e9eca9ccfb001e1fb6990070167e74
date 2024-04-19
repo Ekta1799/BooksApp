@@ -1,0 +1,25 @@
+package com.example.controller;
+
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
+
+@RestController
+public class testController {
+	
+	@RequestMapping(value = "/hello, method = { RequestMethod.GET }, produces = {
+			MediaType.MEDIA_TYPE_JSON_VALUE })
+	public ResponseEntity<?> getEBPPlansByScope(HttpServletRequest request)
+			throws Exception {
+		
+	}
+	@ResponseBody
+	@GetMapping("/hello/{name}/{age}") 
+	   public void insert(@PathVariable("name") String name, @PathVariable("age") int age) { 
+	         
+	       // Print and display name and age 
+	       System.out.println(name); 
+	       System.out.println(age); 
+	   }
+}

@@ -1,0 +1,33 @@
+package com.example.model;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.Table;
+
+@Entity
+@Table(name = "user_book_wish_list")
+public class UserBookWishList {
+	@ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+	
+	private Long book_id;
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
+
+	public Long getBook_id() {
+		return book_id;
+	}
+
+	public void setBook_id(Long book_id) {
+		this.book_id = book_id;
+	}
+
+}

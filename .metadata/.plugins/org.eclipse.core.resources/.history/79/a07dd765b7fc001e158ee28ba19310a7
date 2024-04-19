@@ -1,0 +1,102 @@
+package com.example.model;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
+import lombok.Data;
+
+@Entity
+@Data
+@Table(name = "books")
+public class UserProfile {
+	
+	private Long id;
+	
+	private String first_name;
+	
+	private String last_name;
+	
+	private String username;
+	
+	private Long phone_no;
+	
+	private Long favorite_genre_id;
+	
+	private Long reading_preference_id;
+	
+	private Long books_owned_id;
+	
+	private Long books_wishlist_id;
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public String getFirst_name() {
+		return first_name;
+	}
+
+	public void setFirst_name(String first_name) {
+		this.first_name = first_name;
+	}
+
+	public String getLast_name() {
+		return last_name;
+	}
+
+	public void setLast_name(String last_name) {
+		this.last_name = last_name;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public Long getPhone_no() {
+		return phone_no;
+	}
+
+	public void setPhone_no(Long phone_no) {
+		this.phone_no = phone_no;
+	}
+
+	public Long getFavorite_genre_id() {
+		return favorite_genre_id;
+	}
+
+	public void setFavorite_genre_id(Long favorite_genre_id) {
+		this.favorite_genre_id = favorite_genre_id;
+	}
+
+	public Long getReading_preference_id() {
+		return reading_preference_id;
+	}
+
+	public void setReading_preference_id(Long reading_preference_id) {
+		this.reading_preference_id = reading_preference_id;
+	}
+
+	public Long getBooks_owned_id() {
+		return books_owned_id;
+	}
+
+	public void setBooks_owned_id(Long books_owned_id) {
+		this.books_owned_id = books_owned_id;
+	}
+
+	public Long getBooks_wishlist_id() {
+		return books_wishlist_id;
+	}
+
+	public void setBooks_wishlist_id(Long books_wishlist_id) {
+		this.books_wishlist_id = books_wishlist_id;
+	}
+
+}

@@ -1,0 +1,49 @@
+package com.example.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
+import com.example.model.User;
+import com.example.model.Userprofile;
+
+import jakarta.transaction.Transactional;
+
+public interface UserprofileRepository extends JpaRepository<Userprofile, Long> {
+	
+	@Transactional
+    @Modifying
+    @Query("UPDATE Userprofile u SET u.firstname = :firstname, u.lastname = :lastname, u.phoneNo = :phoneNo WHERE u.username = :username")
+	void updateUserProfileByUsername(@Param("username") String username, @Param("firstname") String firstname, 
+			@Param("lastname") String lastname, @Param("phoneNo") String phoneNo);
+	
+	@Transactional
+    @Modifying
+    @Query("UPDATE UserReadingPreference p SET p.user = :user, p.book_id =:book_id WHERE p.userProfile.username = :username")
+    void updateUserReadingPreferenceByUsername(@Param("username") String username, 
+                                                @Param("user") User user,
+                                                @Param("book_id") Long book_id);
+	
+	@Transactional
+    @Modifying
+    @Query("UPDATE UserFavGenre p SET p.user = :user, p.genre_id =:genre_id WHERE p.userProfile.username = :username")
+    void updateUserFavGenreByUsername(@Param("username") String username, 
+                                                @Param("user") User user,
+                                                @Param("genre_id") Long genre_id);
+	
+	@Transactional
+    @Modifying
+    @Query("UPDATE UserReadingPreference p SET p.user = :user, p.book_id =:book_id WHERE p.userProfile.username = :username")
+    void updateUserReadingPreferenceByUsername(@Param("username") String username, 
+                                                @Param("user") User user,
+                                                @Param("book_id") Long book_id);
+	
+	@Transactional
+    @Modifying
+    @Query("UPDATE UserReadingPreference p SET p.user = :user, p.book_id =:book_id WHERE p.userProfile.username = :username")
+    void updateUserReadingPreferenceByUsername(@Param("username") String username, 
+                                                @Param("user") User user,
+                                                @Param("book_id") Long book_id);
+
+}

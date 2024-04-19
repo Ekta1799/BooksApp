@@ -1,0 +1,52 @@
+package com.example.services;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.model.Books;
+import com.example.pojo.BooksResource;
+import com.example.repository.BookRepository;
+
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+public class BooksServiceImpl implements BooksService {
+
+	@Autowired
+	private BookRepository bookRepository;
+
+	public List<BooksResource> getAllBooks(int page, int size) {
+		List<Books> books = bookRepository.findAll();
+		List<BooksResource> list = new ArrayList<BooksResource>();
+		for (Books book : books) {
+			list.add(convertDTOtoResource(book));
+		}
+
+		return list;
+	}
+
+	private BooksResource convertDTOtoResource(Books books) {
+		BooksResource res = new BooksResource();
+
+		res.setTitle(books.getTitle());
+		res.setAuthor(books.getAuthor());
+		res.setGenre(books.getGenre());
+		res.setCondition(books.getCondition());
+		res.setAvailability(books.getAvailability());
+
+		return res;
+	}
+	
+	// Read operation 
+    @Override public List<Books> fetchBooksList() 
+    { 
+    	
+    	List<Books> list = bookRepository.findAll()
+        return (; 
+    } 
+
+}

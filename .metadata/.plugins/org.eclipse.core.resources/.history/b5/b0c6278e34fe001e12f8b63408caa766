@@ -1,0 +1,20 @@
+package com.example.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
+import com.example.model.Userprofile;
+
+import jakarta.transaction.Transactional;
+
+public interface UserprofileRepository extends JpaRepository<Userprofile, Long> {
+	
+	@Transactional
+    @Modifying
+    @Query("UPDATE Userprofile u SET u.firstname = :firstname, u.lastname = :lastname, u.phoneNo = :phoneNo WHERE u.username = :username")
+	void updateUserProfileByUsername(@Param("username") String username, @Param("firstname") String firstname, 
+			@Param("lastname") String lastname, @Param("phoneNo") String phoneNo);
+
+}

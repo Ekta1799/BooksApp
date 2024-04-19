@@ -1,0 +1,31 @@
+package com.example.facade;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.example.pojo.BooksResource;
+import com.example.services.BooksService;
+
+@Component
+public class BooksFacade {
+	@Autowired
+	private BooksService service;
+
+	public List<BooksResource> getBooks(String genre, String author, String title, String location, Boolean availability) {
+
+		List<BooksResource> list = service.getAllBooks(0, 10, genre, author, title, location, availability);
+		
+		return list;
+	}
+	
+	public BooksResource getBookById(Integer id) {
+
+		BooksResource book = service.getBookById(id.toUnsignedLong(0));
+		
+		return book;
+	}
+
+}

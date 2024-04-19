@@ -1,0 +1,19 @@
+package com.example.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
+
+import com.example.model.UserProfile;
+
+@Repository
+public interface UserProfileRepository extends JpaRepository<UserProfile, Long> {
+
+	@Modifying
+    @Query("UPDATE user_profile u SET u.first_name = :first_name, u.last_name = :last_name,"
+    		+ " u.phone_no = :phone_no, u.favorite_genre_id = :favorite_genre_id, "
+    		+ " u.reading_preference_id = :reading_preference_id,  u. = :books_owned_id,"
+    		+ " u.books_wishlist_id = :books_wishlist_id WHERE u.username = :username")
+    int updateFieldsByUsernameWhereNull(String username, String field1Value, String field2Value);
+}

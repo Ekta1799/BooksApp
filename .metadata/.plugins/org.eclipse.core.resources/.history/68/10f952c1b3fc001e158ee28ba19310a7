@@ -1,0 +1,71 @@
+package com.example.services;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.example.model.Books;
+import com.example.pojo.BooksResource;
+import com.example.repository.BookRepository;
+
+import lombok.RequiredArgsConstructor;
+
+@Service
+@RequiredArgsConstructor
+public class BooksServiceImpl implements BooksService {
+
+	@Autowired
+	private BookRepository bookRepository;
+
+	public List<BooksResource> getAllBooks(int page, int size) {
+		
+		// Map genre IDs to genre names
+        Map<Integer, String> genreMap = new HashMap<>();
+        List<Genre> genres = genreRepository.findAll();
+        for (Genre genre : genres) {
+            genreMap.put(genre.getId(), genre.getName());
+        }
+        
+		List<Books> books = bookRepository.findAll();
+		List<BooksResource> list = new ArrayList<BooksResource>();
+		for (Books book : books) {
+			list.add(convertDTOtoResource(book));
+		}
+
+		return list;
+	}
+
+	private BooksResource convertDTOtoResource(Books books) {
+		BooksResource res = new BooksResource();
+
+		res.setTitle(books.getTitle());
+		res.setAuthor(books.getAuthor());
+		res.setGenre(books.getGenre_id());
+		res.setCondition(books.getCondition_status());
+		res.setAvailability(books.isAvailability());
+
+		return res;
+	}
+	
+	public BooksResource getBookById(Long id) {
+		Optional<Books> books = bookRepository.findById(id);
+		
+		Books book = books.get();
+		
+		BooksResource res = convertDTOtoResource(book);
+		
+		return res;
+	}
+
+	// Read operation 
+    @Override public List<Books> fetchBooksList() 
+    { 
+    	
+    	List<Books> list = bookRepository.findAll();
+        return list; 
+    } 
+
+}

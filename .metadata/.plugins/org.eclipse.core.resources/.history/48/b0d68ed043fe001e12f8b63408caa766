@@ -1,0 +1,11 @@
+package com.example.repository;
+
+@Repository
+public interface UserReadingPreferenceRepository extends JpaRepository<UserReadingPreference, Long> {
+
+    @Transactional
+    @Modifying
+    @Query(value = "INSERT INTO user_reading_preference (user_id, book_id) VALUES (:userId, :bookId)", nativeQuery = true)
+    void addUserReadingPreferences(@Param("userId") Long userId, @Param("bookId") Set<Long> bookIds);
+
+}

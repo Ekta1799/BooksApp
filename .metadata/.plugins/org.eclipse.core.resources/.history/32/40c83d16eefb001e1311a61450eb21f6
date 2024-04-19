@@ -1,0 +1,9 @@
+package com.example.services;
+
+import java.util.List;
+
+import com.books.pojo.BooksResource;
+
+public interface BooksService {
+	public List<BooksResource> getAllBooks(int page, int size);
+}
