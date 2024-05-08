@@ -1,0 +1,15 @@
+1713972741734	Rename package 'com.example.configuration'
+1713972763603	Rename package 'com.example.controller'
+1713972793037	Rename package 'com.example.demo'
+1713972813577	Rename type 'DemoApplication'
+1713972831056	Rename package 'com.example.exception'
+1713972853271	Rename package 'com.example.facade'
+1713972869228	Rename package 'com.example.jwt'
+1713972884780	Rename package 'com.example.model'
+1713972896380	Rename package 'com.example.pojo'
+1713972908334	Rename package 'com.example.repository'
+1713972922787	Rename package 'com.example.response'
+1713972942523	Move compilation unit
+1713972954292	Delete element
+1713972969197	Rename package 'com.example.services'
+1713973461846	Rename type 'testController'

@@ -1,0 +1,22 @@
+package com.books.app.repository;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+
+import com.books.app.model.UserBookOwnedList;
+
+import jakarta.transaction.Transactional;
+
+@Transactional
+public interface UserBookOwnedRepository extends JpaRepository<UserBookOwnedList, Long> {
+
+	@Modifying
+    @Query("DELETE FROM UserBookOwnedList ufg WHERE ufg.userId = :userId")
+    void deleteUserBookOwnedByUserId(@Param("userId")Long userId);
+
+    @Modifying
+    @Query("INSERT INTO UserBookOwnedList (userId, bookId) VALUES (:userId, :bookId)")
+    void insertUserBookOwnedByUserId(@Param("userId")Long userId, @Param("bookId")Long bookId);
+}
