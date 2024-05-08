@@ -9,7 +9,9 @@ import org.springframework.stereotype.Repository;
 
 import com.books.app.model.User;
 
-@Repository
+import jakarta.transaction.Transactional;
+
+@Transactional
 public interface UserRepository extends JpaRepository<User, Long> {
 	Optional<User> findByUsername(String username);
 

@@ -24,9 +24,6 @@ import jakarta.servlet.http.HttpServletRequest;
 public class UserProfileController {
 
 	@Autowired
-	private UserprofileRepository userprofileRepo;
-
-	@Autowired
 	private UserProfileFacade userProfileFacade;
 
 	// POST - Create user profile
@@ -64,7 +61,7 @@ public class UserProfileController {
 	@PutMapping("/userProfile")
 	public ResponseEntity<?> updateUserProfile(@RequestBody UserProfileRequest userProfileRequest) {
 
-		boolean response = userProfileFacade.createUserProfile(userProfileRequest);
+		boolean response = userProfileFacade.updateUserProfile(userProfileRequest);
 		if (!response) {
 			return ResponseEntity.badRequest().body(new MessageResponse("Error: User profile could not be created!"));
 		}
