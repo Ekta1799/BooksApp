@@ -24,9 +24,5 @@ public interface BookRepository extends JpaRepository<Books, Long> {
                              @Param("author") String author,
                              @Param("title") String title,
                              @Param("availability") Boolean availability);
-    
-    @Query("SELECT u FROM Userprofile u " +
-            "WHERE u.firstname = :firstname ")
-     Userprofile getUserProfile(@Param("firstname") String firstname);
 
 }

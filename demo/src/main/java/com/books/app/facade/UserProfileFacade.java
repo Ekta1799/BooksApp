@@ -11,6 +11,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 
 import com.books.app.model.Books;
 import com.books.app.model.Genres;
@@ -29,6 +30,7 @@ import com.books.app.repository.UserprofileRepository;
 import com.books.app.services.UserProfileService;
 import com.books.app.services.UserService;
 
+@Component
 public class UserProfileFacade {
 	
 	private static final Logger logger = LoggerFactory.getLogger(UserProfileFacade.class);

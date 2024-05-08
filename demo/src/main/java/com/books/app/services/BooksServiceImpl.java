@@ -53,15 +53,6 @@ public class BooksServiceImpl implements BooksService {
 		return list;
 	}
 
-	public Userprofile getUserProfile(String firstName) {
-
-		Userprofile res = new Userprofile();
-
-		res = bookRepository.getUserProfile(firstName);
-
-		return res;
-	}
-
 	private Map<Long, String> getGenres() {
 		// Map genre IDs to genre names
 		Map<Long, String> genreMap = new HashMap<Long, String>();

@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.books.app.facade.UserProfileFacade;
 import com.books.app.model.Userprofile;
@@ -19,13 +20,14 @@ import com.books.app.repository.UserprofileRepository;
 
 import jakarta.servlet.http.HttpServletRequest;
 
+@RestController
 public class UserProfileController {
 
 	@Autowired
-	UserprofileRepository userprofileRepo;
+	private UserprofileRepository userprofileRepo;
 
 	@Autowired
-	UserProfileFacade userProfileFacade;
+	private UserProfileFacade userProfileFacade;
 
 	// POST - Create user profile
 	@PostMapping("/userProfile")
