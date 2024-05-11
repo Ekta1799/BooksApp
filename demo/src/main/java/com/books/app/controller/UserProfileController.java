@@ -3,7 +3,8 @@ package com.books.app.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +17,6 @@ import com.books.app.model.Userprofile;
 import com.books.app.pojo.MessageResponse;
 import com.books.app.pojo.UserProfileRequest;
 import com.books.app.pojo.UserRequest;
-import com.books.app.repository.UserprofileRepository;
 
 import jakarta.servlet.http.HttpServletRequest;
 
@@ -26,19 +26,9 @@ public class UserProfileController {
 	@Autowired
 	private UserProfileFacade userProfileFacade;
 
-	// POST - Create user profile
-	@PostMapping("/userProfile")
-	public ResponseEntity<?> saveUserProfile(@RequestBody UserProfileRequest userProfileRequest) {
-
-		boolean response = userProfileFacade.createUserProfile(userProfileRequest);
-		if (!response) {
-			return ResponseEntity.badRequest().body(new MessageResponse("Error: User profile could not be created!"));
-		}
-
-		return ResponseEntity.ok(new MessageResponse("User Profile Created successfully!"));
-	}
-
 	// GET - User profile info based on firstname of user (filter - true)
+	@CrossOrigin(origins = "*", exposedHeaders = "**")
+	@PreAuthorize("hasRole('ROLE_USER')")
 	@RequestMapping(value = "/userProfile", method = { RequestMethod.GET }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
 	public ResponseEntity<?> getUserprofile(@RequestParam(value = "firstName", required = true) String firstName,
@@ -58,6 +48,8 @@ public class UserProfileController {
 	}
 
 	// PUT - Update user profile
+	@CrossOrigin(origins = "*", exposedHeaders = "**")
+	@PreAuthorize("hasRole('ROLE_USER')")
 	@PutMapping("/userProfile")
 	public ResponseEntity<?> updateUserProfile(@RequestBody UserProfileRequest userProfileRequest) {
 
@@ -69,7 +61,9 @@ public class UserProfileController {
 		return ResponseEntity.ok(new MessageResponse("User Profile Updated successfully!"));
 	}
 	
+	@CrossOrigin(origins = "*", exposedHeaders = "**")
 	@PutMapping("/user")
+	@PreAuthorize("hasRole('ROLE_USER')")
 	public ResponseEntity<?> updateUserPassword(@RequestBody UserRequest userRequest) {
 
 		boolean response = userProfileFacade.updateUser(userRequest);

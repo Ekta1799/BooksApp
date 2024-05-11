@@ -1,9 +1,7 @@
 package com.books.app.services;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -12,11 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.books.app.model.Books;
-import com.books.app.model.Genres;
-import com.books.app.model.Userprofile;
 import com.books.app.pojo.BooksResource;
 import com.books.app.repository.BookRepository;
-import com.books.app.repository.GenreRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -29,17 +24,13 @@ public class BooksServiceImpl implements BooksService {
 	@Autowired
 	private BookRepository bookRepository;
 
-	@Autowired
-	private GenreRepository genreRepository;
-
-	public List<BooksResource> getAllBooks(int page, int size, Long genreId, String author, String title,
+	public List<BooksResource> getAllBooks(int page, int size, String genre, String author, String title,
 			Boolean availability) {
-		Map<Long, String> genreMap = getGenres();
 
 		List<Books> books;
-		if (genreId != null || author != null || title != null || availability != null) {
+		if (genre != null || author != null || title != null || availability != null) {
 			// Search with provided criteria
-			books = bookRepository.searchBooks(genreId, author, title, availability);
+			books = bookRepository.searchBooks(genre, author, title, availability);
 		} else {
 			// Fetch all books
 			books = bookRepository.findAll();
@@ -47,34 +38,18 @@ public class BooksServiceImpl implements BooksService {
 
 		List<BooksResource> list = new ArrayList<>();
 		for (Books book : books) {
-			list.add(convertDTOtoResource(book, genreMap));
+			list.add(convertDTOtoResource(book));
 		}
 
 		return list;
 	}
 
-	private Map<Long, String> getGenres() {
-		// Map genre IDs to genre names
-		Map<Long, String> genreMap = new HashMap<Long, String>();
-		List<Genres> genres = genreRepository.findAll();
-		for (Genres genre : genres) {
-			genreMap.put(genre.getGenre_id(), genre.getGenre_name());
-		}
-		return genreMap;
-	}
-
-	private BooksResource convertDTOtoResource(Books books, Map<Long, String> genreMap) {
+	private BooksResource convertDTOtoResource(Books books) {
 		BooksResource res = new BooksResource();
 
-		logger.debug("" + genreMap);
-
-		Long genreId = books.getGenre_id(); // Assuming book.getGenreId() returns a Long
-		String genreName = genreMap.get(genreId);
-
-		logger.debug("" + genreName);
 		res.setTitle(books.getTitle());
 		res.setAuthor(books.getAuthor());
-		res.setGenre(genreName);
+		res.setGenre(books.getGenre());
 		res.setCondition(books.getCondition_status());
 		res.setAvailability(books.isAvailability());
 
@@ -82,12 +57,11 @@ public class BooksServiceImpl implements BooksService {
 	}
 
 	public BooksResource getBookById(Long id) {
-		Map<Long, String> genreMap = getGenres();
 		Optional<Books> books = bookRepository.findById(id);
 
 		Books book = books.get();
 
-		BooksResource res = convertDTOtoResource(book, genreMap);
+		BooksResource res = convertDTOtoResource(book);
 
 		return res;
 	}

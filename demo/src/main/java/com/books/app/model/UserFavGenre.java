@@ -16,17 +16,17 @@ public class UserFavGenre {
     private Long userId;
 
     @Id
-    @Column(name = "genre_id")
-    private Long genreId;
+    @Column(name = "genre")
+    private String genre;
 
     // Constructors, getters, and setters
 
     public UserFavGenre() {
     }
 
-    public UserFavGenre(Long userId, Long genreId) {
+    public UserFavGenre(Long userId, String genre) {
         this.userId = userId;
-        this.genreId = genreId;
+        this.genre = genre;
     }
 
     public Long getUserId() {
@@ -37,11 +37,12 @@ public class UserFavGenre {
         this.userId = userId;
     }
 
-    public Long getGenreId() {
-        return genreId;
-    }
+	public String getGenre() {
+		return genre;
+	}
 
-    public void setGenreId(Long genreId) {
-        this.genreId = genreId;
-    }
+	public void setGenre(String genre) {
+		this.genre = genre;
+	}
+
 }

@@ -1,16 +1,11 @@
 package com.books.app.model;
 
-import java.util.Set;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 
@@ -31,38 +26,6 @@ public class Userprofile {
     
     @Column(name = "phone_no")
     private String phoneNo;
-
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-        name = "user_fav_genre",
-        joinColumns = @JoinColumn(name = "user_id"),
-        inverseJoinColumns = @JoinColumn(name = "genre_id")
-    )
-    private Set<Genres> favoriteGenres;
-    
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-        name = "user_reading_preference",
-        joinColumns = @JoinColumn(name = "user_id"),
-        inverseJoinColumns = @JoinColumn(name = "book_id")
-    )
-    private Set<Books> userReadingPreferences;
-     
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-        name = "user_book_owned_list",
-        joinColumns = @JoinColumn(name = "user_id"),
-        inverseJoinColumns = @JoinColumn(name = "book_id")
-    )
-    private Set<Books> userBookOwnedList;
-    
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(
-        name = "user_book_wish_list",
-        joinColumns = @JoinColumn(name = "user_id"),
-        inverseJoinColumns = @JoinColumn(name = "book_id")
-    )
-    private Set<Books> userBookWishList;
     
 	public Userprofile() {
 	}
@@ -122,35 +85,4 @@ public class Userprofile {
 		this.phoneNo = phoneNo;
 	}
 
-	public Set<Genres> getFavoriteGenres() {
-		return favoriteGenres;
-	}
-
-	public void setFavoriteGenres(Set<Genres> favoriteGenres) {
-		this.favoriteGenres = favoriteGenres;
-	}
-
-	public Set<Books> getUserReadingPreferences() {
-		return userReadingPreferences;
-	}
-
-	public void setUserReadingPreferences(Set<Books> userReadingPrefernces) {
-		this.userReadingPreferences = userReadingPrefernces;
-	}
-
-	public Set<Books> getUserBookOwnedList() {
-		return userBookOwnedList;
-	}
-
-	public void setUserBookOwnedList(Set<Books> userBookOwnedList) {
-		this.userBookOwnedList = userBookOwnedList;
-	}
-
-	public Set<Books> getUserBookWishList() {
-		return userBookWishList;
-	}
-
-	public void setUserBookWishList(Set<Books> userBookWishList) {
-		this.userBookWishList = userBookWishList;
-	}
 }

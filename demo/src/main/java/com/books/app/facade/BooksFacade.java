@@ -13,12 +13,19 @@ public class BooksFacade {
 	@Autowired
 	private BooksService service;
 
-	public List<BooksResource> getBooks(Long genreId, String author, String title,
+	public List<BooksResource> getBooks(String genre, String author, String title,
 			Boolean availability) {
 
-		List<BooksResource> list = service.getAllBooks(0, 10, genreId, author, title, availability);
+		List<BooksResource> list = service.getAllBooks(0, 10, genre, author, title, availability);
 
 		return list;
+	}
+	
+	public BooksResource createBooks(BooksResource book) {
+
+		BooksResource bookCreated = service.createBooks(book);
+
+		return bookCreated;
 	}
 
 	@SuppressWarnings("static-access")

@@ -10,13 +10,13 @@ import com.books.app.model.UserFavGenre;
 import jakarta.transaction.Transactional;
 
 @Transactional
-public interface UserFavGenreRepository extends JpaRepository<UserFavGenre, Long> {
+public interface UserFavGenreRepository extends JpaRepository<UserFavGenre, String> {
 
 	@Modifying
     @Query("DELETE FROM UserFavGenre ufg WHERE ufg.userId = :userId")
     void deleteUserFavoriteGenresByUserId(@Param("userId")Long userId);
 
     @Modifying
-    @Query("INSERT INTO UserFavGenre (userId, genreId) VALUES (:userId, :genreId)")
-    void insertUserFavoriteGenreByUserId(@Param("userId")Long userId, @Param("genreId")Long genreId);
+    @Query("INSERT INTO UserFavGenre (userId, genre) VALUES (:userId, :genre)")
+    void insertUserFavoriteGenreByUserId(@Param("userId")Long userId, @Param("genre")String genre);
 }

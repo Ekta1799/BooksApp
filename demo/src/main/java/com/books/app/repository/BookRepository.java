@@ -16,11 +16,11 @@ public interface BookRepository extends JpaRepository<Books, Long> {
 //    List<Book> findAllByCategory(Category name);
     
     @Query("SELECT b FROM Books b " +
-            "WHERE (:genreId IS NULL OR b.genre_id = :genreId) " +
+            "WHERE (:genreId IS NULL OR b.genre = :genre) " +
             "AND (:author IS NULL OR b.author = :author) " +
             "AND (:title IS NULL OR b.title = :title) " +
             "AND (:availability IS NULL OR b.availability = :availability)")
-     List<Books> searchBooks(@Param("genreId") Long genreId,
+     List<Books> searchBooks(@Param("genre") String genre,
                              @Param("author") String author,
                              @Param("title") String title,
                              @Param("availability") Boolean availability);

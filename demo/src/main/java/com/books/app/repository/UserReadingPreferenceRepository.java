@@ -10,13 +10,13 @@ import com.books.app.model.UserReadingPreference;
 import jakarta.transaction.Transactional;
 
 @Transactional
-public interface UserReadingPreferenceRepository extends JpaRepository<UserReadingPreference, Long> {
+public interface UserReadingPreferenceRepository extends JpaRepository<UserReadingPreference, String> {
 
 	@Modifying
     @Query("DELETE FROM UserReadingPreference ufg WHERE ufg.userId = :userId")
     void deleteUserReadingPreferenceByUserId(@Param("userId")Long userId);
 
     @Modifying
-    @Query("INSERT INTO UserReadingPreference (userId, bookId) VALUES (:userId, :bookId)")
-    void insertUserReadingPrefernceByUserId(@Param("userId")Long userId, @Param("bookId")Long bookId);
+    @Query("INSERT INTO UserReadingPreference (userId, book) VALUES (:userId, :book)")
+    void insertUserReadingPrefernceByUserId(@Param("userId")Long userId, @Param("book")String book);
 }

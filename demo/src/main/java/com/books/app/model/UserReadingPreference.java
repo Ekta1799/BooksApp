@@ -16,17 +16,15 @@ public class UserReadingPreference {
     private Long userId;
 
 	@Id
-	@Column(name = "book_id")
-    private Long bookId;
-
-    // Constructors, getters, and setters
+	@Column(name = "book")
+    private String book;
 
     public UserReadingPreference() {
     }
 
-    public UserReadingPreference(Long userId, Long bookId) {
+    public UserReadingPreference(Long userId, String book) {
         this.userId = userId;
-        this.bookId = bookId;
+        this.book = book;
     }
 
     public Long getUserId() {
@@ -37,11 +35,11 @@ public class UserReadingPreference {
         this.userId = userId;
     }
 
-    public Long getBookId() {
-        return bookId;
-    }
+	public String getBook() {
+		return book;
+	}
 
-    public void setBookId(Long bookId) {
-        this.bookId = bookId;
-    }
+	public void setBook(String book) {
+		this.book = book;
+	}
 }

@@ -22,6 +22,7 @@ import com.books.app.jwt.JwtUtils;
 import com.books.app.model.ERole;
 import com.books.app.model.Role;
 import com.books.app.model.User;
+import com.books.app.model.Userprofile;
 import com.books.app.pojo.JWTResponse;
 import com.books.app.pojo.LoginRequest;
 import com.books.app.pojo.MessageResponse;
@@ -100,6 +101,11 @@ public class AuthController {
 
 		user.setRoles(roles);
 		userRepository.save(user);
+
+		Userprofile userProfile = new Userprofile();
+		userProfile.setUser(user);
+		userProfile.setUsername(user.getUsername());
+		userprofileRepo.save(userProfile);
 
 		return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
 	}

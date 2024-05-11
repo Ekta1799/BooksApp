@@ -11,7 +11,7 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "books")
+@Table(name = "book_store")
 public class Books {
 	
 	@Id
@@ -22,8 +22,7 @@ public class Books {
 
 	private String author;
 
-	@JoinTable(name = "genres", joinColumns = @JoinColumn(name = "genre_id"), inverseJoinColumns = @JoinColumn(name = "genre_name"))
-	private Long genre_id;
+	private String genre;
 
 	private String condition_status;
 
@@ -53,12 +52,12 @@ public class Books {
 		this.author = author;
 	}
 
-	public Long getGenre_id() {
-		return genre_id;
+	public String getGenre() {
+		return genre;
 	}
 
-	public void setGenre_id(Long genre_id) {
-		this.genre_id = genre_id;
+	public void setGenre(String genre) {
+		this.genre = genre;
 	}
 
 	public String getCondition_status() {

@@ -7,7 +7,7 @@ import com.books.app.model.Userprofile;
 import com.books.app.pojo.BooksResource;
 
 public interface BooksService {
-	public List<BooksResource> getAllBooks(int page, int size, Long genreId, String author, String title, Boolean availability);
+	public List<BooksResource> getAllBooks(int page, int size, String genre, String author, String title, Boolean availability);
 
 	List<Books> fetchBooksList();
 

@@ -20,8 +20,8 @@ public interface UserprofileRepository extends JpaRepository<Userprofile, Long> 
 	Boolean existsByUserId(@Param("userId") Long userId);
 	
 	@Modifying
-    @Query(value = "UPDATE user_profile SET firstname = ?2 , lastname = ?3, phone_no = ?4 WHERE user_id = ?1", nativeQuery = true)
-    void updateUserFavoriteGenres(Long userId, String firstname, String lastname, String phone_no);
+    @Query(value = "UPDATE user_profile SET firstname = ?2 , lastname = ?3, phone_no = ?4 WHERE id = ?1", nativeQuery = true)
+    void updateUserProfile(Long userId, String firstname, String lastname, String phone_no);
 	
 	@Query("SELECT u FROM Userprofile u " +
             "WHERE u.firstname = :firstname ")

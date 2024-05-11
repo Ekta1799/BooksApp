@@ -10,13 +10,13 @@ import com.books.app.model.UserBookOwnedList;
 import jakarta.transaction.Transactional;
 
 @Transactional
-public interface UserBookOwnedRepository extends JpaRepository<UserBookOwnedList, Long> {
+public interface UserBookOwnedRepository extends JpaRepository<UserBookOwnedList, String> {
 
 	@Modifying
     @Query("DELETE FROM UserBookOwnedList ufg WHERE ufg.userId = :userId")
     void deleteUserBookOwnedByUserId(@Param("userId")Long userId);
 
     @Modifying
-    @Query("INSERT INTO UserBookOwnedList (userId, bookId) VALUES (:userId, :bookId)")
-    void insertUserBookOwnedByUserId(@Param("userId")Long userId, @Param("bookId")Long bookId);
+    @Query("INSERT INTO UserBookOwnedList (userId, book) VALUES (:userId, :book)")
+    void insertUserBookOwnedByUserId(@Param("userId")Long userId, @Param("book")String book);
 }

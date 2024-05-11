@@ -6,8 +6,9 @@
 		<item key="wholeword" value="false"/>
 		<item key="incremental" value="false"/>
 		<item key="isRegEx" value="false"/>
-		<item key="selection" value="userProfileRepository"/>
+		<item key="selection" value="UserService"/>
 		<list key="findhistory">
+			<item value="userService"/>
 			<item value="userProfileRepository"/>
 		</list>
 		<list key="replacehistory">
