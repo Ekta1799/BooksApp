@@ -1,0 +1,33 @@
+package com.books.app.repository;
+
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
+
+import com.books.app.model.Books;
+
+@Repository
+public interface BookRepository extends JpaRepository<Books, Long> {
+
+//    List<Book> findAllByCategory(Category name);
+    
+    @Query("SELECT b FROM Books b " +
+            "WHERE (:genre IS NULL OR b.genre = :genre) " +
+            "AND (:author IS NULL OR b.author = :author) " +
+            "AND (:title IS NULL OR b.title = :title) " +
+            "AND (:availability IS NULL OR b.availability = :availability)")
+     List<Books> searchBooks(@Param("genre") String genre,
+                             @Param("author") String author,
+                             @Param("title") String title,
+                             @Param("availability") Boolean availability);
+    
+    @Query("Select b from Books b WHERE b.title = :title")
+    Books findByTitle(@Param("title")String title);
+    
+    @Query("Select b from Books b WHERE b.user_id = :id")
+    List<Books> findByUserId(@Param("id")Long id);
+
+}

@@ -58,9 +58,9 @@ public class BooksServiceImpl implements BooksService {
 		return res;
 	}
 
-	public List<BooksResource> getBookByUserId(Long userId) {
+	public List<BooksResource> getBooksForUsersOtherThanUsername(Long userId) {
 		
-		List<Books> books = bookRepository.findByUserId(userId);
+		List<Books> books = bookRepository.findBooksForUsersOtherThanUsername(userId);
 
 		List<BooksResource> list = new ArrayList<BooksResource>();
 		for(Books book : books) {

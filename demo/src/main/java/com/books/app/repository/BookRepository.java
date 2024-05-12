@@ -27,7 +27,7 @@ public interface BookRepository extends JpaRepository<Books, Long> {
     @Query("Select b from Books b WHERE b.title = :title")
     Books findByTitle(@Param("title")String title);
     
-    @Query("Select b from Books b WHERE b.user_id = :id")
-    List<Books> findByUserId(@Param("id")Long id);
+    @Query("Select b from Books b WHERE b.user_id != :id")
+    List<Books> findBooksForUsersOtherThanUsername(@Param("id")Long id);
 
 }

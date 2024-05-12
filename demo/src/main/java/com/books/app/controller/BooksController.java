@@ -55,7 +55,7 @@ public class BooksController {
 	
 	//GET - books with filters
 	@CrossOrigin(origins = "*", exposedHeaders = "**")
-	@PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN', 'ROLE_MODERATOR')")
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_MODERATOR')")
 	@RequestMapping(value = "/books", method = { RequestMethod.GET }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
     public ResponseEntity<?> searchBooks(
@@ -93,12 +93,13 @@ public class BooksController {
 	@PreAuthorize("hasAnyRole('ROLE_USER')")
 	@RequestMapping(value = "/books/{username}", method = { RequestMethod.GET }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<?> getBooksByUsername(@PathVariable("username") String username) {
+	public ResponseEntity<?> getBooksForUsersOtherThanUsername(@PathVariable("username") String username) {
 
 		logger.info("book for given username " + username);
 
-		List<BooksResource> books = facade.getBookByUsername(username);
+		List<BooksResource> books = facade.getBooksForUsersOtherThanUsername(username);
 
 		return ResponseEntity.ok(books);
 	}
+	
 }

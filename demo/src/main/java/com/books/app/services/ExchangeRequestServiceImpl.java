@@ -1,5 +1,7 @@
 package com.books.app.services;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,6 +22,13 @@ public class ExchangeRequestServiceImpl implements ExchangeRequestService{
 		exchangeRequestRepository.save(exchangeRequest);
 		
 		
+	}
+	
+	public List<ExchangeRequest> getExchangeRequests() {
+		
+		List<ExchangeRequest> exchangeRequestList = exchangeRequestRepository.getExchangeRequests();
+		
+		return exchangeRequestList;
 	}
 	
 	public void getExchangeRequestByUsername(ExchangeRequest exchangeRequest) {

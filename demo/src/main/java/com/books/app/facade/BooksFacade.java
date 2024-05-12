@@ -48,12 +48,12 @@ public class BooksFacade {
 
 	}
 
-	public List<BooksResource> getBookByUsername(String username) {
+	public List<BooksResource> getBooksForUsersOtherThanUsername(String username) {
 		
 		logger.debug("username "+ username);
 		Long userId = userRepository.userByUsername(username);
 
-		List<BooksResource> books = service.getBookByUserId(userId);
+		List<BooksResource> books = service.getBooksForUsersOtherThanUsername(userId);
 
 		return books;
 	}

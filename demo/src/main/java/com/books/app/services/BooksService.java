@@ -10,7 +10,7 @@ public interface BooksService {
 
 	List<Books> fetchBooksList();
 
-	public List<BooksResource> getBookByUserId(Long userId);
+	public List<BooksResource> getBooksForUsersOtherThanUsername(Long userId);
 	
 	public void createBooks(Books book);
 }
