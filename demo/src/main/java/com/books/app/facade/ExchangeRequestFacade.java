@@ -1,7 +1,5 @@
 package com.books.app.facade;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,26 +45,6 @@ public class ExchangeRequestFacade {
 		
 		exchangeRequestService.createExchangeRequest(exchangeRequest);
 
-	}
-	
-	public List<ExchangeRequestResource> getExchangeRequests() {
-		
-		List<ExchangeRequestResource> resourceList = new ArrayList<ExchangeRequestResource>();
-		List<ExchangeRequest> requestList = exchangeRequestService.getExchangeRequests();
-		
-		for(ExchangeRequest r : requestList) {
-			ExchangeRequestResource res = new ExchangeRequestResource();
-			
-			res.setBook(r.getBook().getTitle());
-			res.setSenderUsername(r.getSender().getUsername());
-			res.setRecieverUsername(r.getReceiver().getUsername());
-			res.setDuration(r.getDuration());
-			res.setDeliveryMethod(r.getDeliveryMethod());
-			
-			resourceList.add(res);
-		}
-		
-		return resourceList;
 	}
 	
 }

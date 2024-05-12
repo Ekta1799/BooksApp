@@ -1,7 +1,5 @@
 package com.books.app.pojo;
 
-import java.util.Set;
-
 public class SignupRequest {
 	private String username;
 

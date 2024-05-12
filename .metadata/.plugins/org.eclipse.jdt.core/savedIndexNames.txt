@@ -64,7 +64,6 @@ INDEX VERSION 1.134+C:\csrf\.metadata\.plugins\org.eclipse.jdt.core
 1891766054.index
 1865797976.index
 3835764974.index
-3435648363.index
 1818111930.index
 3144072689.index
 3856219969.index
