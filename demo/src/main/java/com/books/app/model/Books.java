@@ -4,8 +4,6 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
 import jakarta.persistence.Table;
 import lombok.Data;
 
@@ -15,7 +13,7 @@ import lombok.Data;
 public class Books {
 	
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO) 
+    @GeneratedValue(strategy = GenerationType.IDENTITY) 
     private Long book_id;
 
 	private String title;
@@ -27,6 +25,8 @@ public class Books {
 	private String condition_status;
 
 	private boolean availability;
+	
+	private Long user_id;
 
 	public Long getBook_id() {
 		return book_id;
@@ -74,6 +74,14 @@ public class Books {
 
 	public void setAvailability(boolean availability) {
 		this.availability = availability;
+	}
+
+	public Long getUser_id() {
+		return user_id;
+	}
+
+	public void setUser_id(Long user_id) {
+		this.user_id = user_id;
 	}
 }
 

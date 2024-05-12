@@ -3,7 +3,6 @@ package com.books.app.services;
 import java.util.List;
 
 import com.books.app.model.Books;
-import com.books.app.model.Userprofile;
 import com.books.app.pojo.BooksResource;
 
 public interface BooksService {
@@ -11,5 +10,7 @@ public interface BooksService {
 
 	List<Books> fetchBooksList();
 
-	public BooksResource getBookById(Long id);
+	public List<BooksResource> getBookByUserId(Long userId);
+	
+	public void createBooks(Books book);
 }

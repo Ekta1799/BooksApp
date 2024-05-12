@@ -2,16 +2,25 @@ package com.books.app.facade;
 
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.books.app.model.Books;
 import com.books.app.pojo.BooksResource;
+import com.books.app.repository.UserRepository;
 import com.books.app.services.BooksService;
 
 @Component
 public class BooksFacade {
+	private static final Logger logger = LoggerFactory.getLogger(BooksFacade.class);
+
 	@Autowired
 	private BooksService service;
+	
+	@Autowired
+	private UserRepository userRepository;
 
 	public List<BooksResource> getBooks(String genre, String author, String title,
 			Boolean availability) {
@@ -21,19 +30,32 @@ public class BooksFacade {
 		return list;
 	}
 	
-	public BooksResource createBooks(BooksResource book) {
+	public void createBooks(BooksResource book) {
 
-		BooksResource bookCreated = service.createBooks(book);
+		Books bookModel = new Books();
+		
+		bookModel.setTitle(book.getTitle());
+		bookModel.setAuthor(book.getAuthor());
+		bookModel.setGenre(book.getGenre());
+		bookModel.setAvailability(book.isAvailability());
+		bookModel.setCondition_status(book.getCondition());
+		
+		Long userId = userRepository.userByUsername(book.getUsername());
+		bookModel.setUser_id(userId);
+		logger.debug("user id = "+userId);
+		
+		service.createBooks(bookModel);
 
-		return bookCreated;
 	}
 
-	@SuppressWarnings("static-access")
-	public BooksResource getBookById(Integer id) {
+	public List<BooksResource> getBookByUsername(String username) {
+		
+		logger.debug("username "+ username);
+		Long userId = userRepository.userByUsername(username);
 
-		BooksResource book = service.getBookById(id.toUnsignedLong(0));
+		List<BooksResource> books = service.getBookByUserId(userId);
 
-		return book;
+		return books;
 	}
 
 }

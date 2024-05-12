@@ -1,0 +1,59 @@
+package com.books.app.facade;
+
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.books.app.model.Books;
+import com.books.app.pojo.BooksResource;
+import com.books.app.repository.UserRepository;
+import com.books.app.services.BooksService;
+
+@Component
+public class BooksFacade {
+	private static final Logger logger = LoggerFactory.getLogger(BooksFacade.class);
+
+	@Autowired
+	private BooksService service;
+	
+	@Autowired
+	UserRepository userRepository;
+
+	public List<BooksResource> getBooks(String genre, String author, String title,
+			Boolean availability) {
+
+		List<BooksResource> list = service.getAllBooks(0, 10, genre, author, title, availability);
+
+		return list;
+	}
+	
+	public void createBooks(BooksResource book) {
+
+		Books bookModel = new Books();
+		
+		bookModel.setTitle(book.getTitle());
+		bookModel.setAuthor(book.getAuthor());
+		bookModel.setGenre(book.getGenre());
+		bookModel.setAvailability(book.isAvailability());
+		bookModel.setCondition_status(book.getCondition());
+		
+		logger.debug("here 1");
+		Long userId = userRepository.userByUsername(book.getUsername());
+		bookModel.setUser_id(userId);
+		logger.debug("here 2 + user id = "+userId);
+		
+		service.createBooks(bookModel);
+
+	}
+
+	public BooksResource getBookById(String username) {
+
+		BooksResource book = service.getBookById(username);
+
+		return book;
+	}
+
+}

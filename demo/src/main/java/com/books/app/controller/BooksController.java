@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.books.app.facade.BooksFacade;
 import com.books.app.pojo.BooksResource;
 import com.books.app.pojo.MessageResponse;
-import com.books.app.pojo.SignupRequest;
 import com.books.app.repository.UserBookOwnedRepository;
 import com.books.app.repository.UserBookWishRepository;
 import com.books.app.repository.UserFavGenreRepository;
@@ -84,21 +83,21 @@ public class BooksController {
         logger.info("Create books");
      
         // Call facade method to get books with optional search criteria
-        BooksResource books = facade.createBooks(book);
+        facade.createBooks(book);
 
         return ResponseEntity.ok(new MessageResponse("Book successfully added into the book store!"));
     }	
 	
-	//GET - books by id
+	//GET - books by username
 	@CrossOrigin(origins = "*", exposedHeaders = "**")
-	@PreAuthorize("hasAnyRole('ROLE_USER', 'ROLE_ADMIN', 'ROLE_MODERATOR')")
-	@RequestMapping(value = "/book/{id}", method = { RequestMethod.GET }, produces = {
+	@PreAuthorize("hasAnyRole('ROLE_USER')")
+	@RequestMapping(value = "/books/{username}", method = { RequestMethod.GET }, produces = {
 			MediaType.APPLICATION_JSON_VALUE })
-	public ResponseEntity<?> getEBPPlansByScope(@PathVariable Integer id) throws Exception {
+	public ResponseEntity<?> getBooksByUsername(@PathVariable("username") String username) {
 
-		logger.info("book for given id " + id);
+		logger.info("book for given username " + username);
 
-		BooksResource books = facade.getBookById(id);
+		List<BooksResource> books = facade.getBookByUsername(username);
 
 		return ResponseEntity.ok(books);
 	}

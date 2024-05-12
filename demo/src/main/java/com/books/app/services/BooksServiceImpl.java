@@ -2,16 +2,14 @@ package com.books.app.services;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.books.app.model.Books;
 import com.books.app.pojo.BooksResource;
 import com.books.app.repository.BookRepository;
+import com.books.app.repository.UserRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -19,10 +17,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class BooksServiceImpl implements BooksService {
 
-	private static final Logger logger = LoggerFactory.getLogger(BooksServiceImpl.class);
-
 	@Autowired
 	private BookRepository bookRepository;
+	
+	@Autowired
+	UserRepository userRepository;
 
 	public List<BooksResource> getAllBooks(int page, int size, String genre, String author, String title,
 			Boolean availability) {
@@ -52,18 +51,23 @@ public class BooksServiceImpl implements BooksService {
 		res.setGenre(books.getGenre());
 		res.setCondition(books.getCondition_status());
 		res.setAvailability(books.isAvailability());
+		
+		String username = userRepository.userByUserId(books.getUser_id());
+		res.setUsername(username);
 
 		return res;
 	}
 
-	public BooksResource getBookById(Long id) {
-		Optional<Books> books = bookRepository.findById(id);
+	public List<BooksResource> getBookByUserId(Long userId) {
+		
+		List<Books> books = bookRepository.findByUserId(userId);
 
-		Books book = books.get();
+		List<BooksResource> list = new ArrayList<BooksResource>();
+		for(Books book : books) {
+			list.add(convertDTOtoResource(book));
+		}
 
-		BooksResource res = convertDTOtoResource(book);
-
-		return res;
+		return list;
 	}
 
 	// Read operation
@@ -72,6 +76,10 @@ public class BooksServiceImpl implements BooksService {
 
 		List<Books> list = bookRepository.findAll();
 		return list;
+	}
+	
+	public void createBooks(Books book) {
+		bookRepository.save(book);
 	}
 
 }

@@ -1,0 +1,5 @@
+package com.books.app.repository;
+
+public class ExchangeRequestRepository {
+
+}

@@ -1,0 +1,12 @@
+package com.books.app.services;
+
+import com.books.app.model.ExchangeRequest;
+import com.books.app.pojo.ExchangeRequestResource;
+
+public interface ExchangeRequestService {
+	
+	public void createExchangeRequest(ExchangeRequest exchangeRequest);
+	
+	public ExchangeRequestResource getExchangeRequestByUserId(Long userId);
+
+}

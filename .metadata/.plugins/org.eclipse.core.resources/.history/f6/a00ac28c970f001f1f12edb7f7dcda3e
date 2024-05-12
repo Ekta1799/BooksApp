@@ -1,0 +1,7 @@
+package com.books.app.services;
+
+public interface ExchangeRequestService {
+	
+	public void createExchangeRequest(ExchangeRequest exchangeRequest);
+
+}

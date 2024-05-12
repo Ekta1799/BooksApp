@@ -11,6 +11,8 @@ public class BooksResource {
 	private String condition;
 
 	private boolean availability;
+	
+	private String username;
 
 	public String getTitle() {
 		return title;
@@ -50,5 +52,13 @@ public class BooksResource {
 
 	public void setAvailability(boolean availability) {
 		this.availability = availability;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 }
